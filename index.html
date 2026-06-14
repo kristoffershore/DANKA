@@ -140,22 +140,17 @@
       min-height: 330px;
       border-radius: 18px;
       border: 1px dashed rgba(255,255,255,0.28);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-      color: var(--muted);
-      background:
-        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.58)),
-        url("band-photo.jpg") center/cover;
+      overflow: hidden;
+      padding: 0;
+      background: none;
     }
-
-    .photo-card span {
-      background: rgba(0,0,0,0.65);
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 0.9rem;
+    
+    .danka-live {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 330px;
+      object-fit: cover;
     }
 
     .grid {
