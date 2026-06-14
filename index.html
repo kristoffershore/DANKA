@@ -549,8 +549,11 @@
           year: "numeric"
         });
 
-        const linkText = show.ticketUrl && show.ticketUrl !== "#" ? "Tickets" : "Details";
-        const linkTarget = show.ticketUrl || "#";
+        const hasLink = show.ticketUrl && show.ticketUrl !== "#";
+
+        const showButton = hasLink
+          ? `<a class="show-link" href="${show.ticketUrl}" target="_blank" rel="noopener">Tickets / Details</a>`
+          : "";
 
         return `
           <article class="show-item">
@@ -564,7 +567,6 @@
               <p class="show-meta">${readableDate} · ${show.time} · ${show.city}</p>
             </div>
 
-            <a class="show-link" href="${linkTarget}" target="_blank" rel="noopener">${linkText}</a>
           </article>
         `;
       }).join("");
