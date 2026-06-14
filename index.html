@@ -245,6 +245,92 @@
       border: 0;
     }
 
+    .shows-card {
+      grid-column: 1 / -1;
+    }
+
+    .shows-intro {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .shows-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .show-item {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .show-date {
+      text-align: center;
+      border-right: 1px solid var(--line);
+      padding-right: 16px;
+    }
+
+    .show-month {
+      display: block;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .show-day {
+      display: block;
+      font-size: 2.15rem;
+      line-height: 1;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .show-details h3 {
+      margin: 0 0 4px;
+      font-size: 1.05rem;
+    }
+
+    .show-meta {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .show-link {
+      justify-self: end;
+      white-space: nowrap;
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .show-link:hover {
+      background: var(--accent);
+      color: #15110a;
+      text-decoration: none;
+    }
+
+    .empty-shows {
+      color: var(--muted);
+      padding: 16px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      text-align: center;
+      background: rgba(255,255,255,0.03);
+    }
+
     .footer {
       margin-top: 22px;
       padding: 22px 0 0;
@@ -266,6 +352,21 @@
       .photo-card {
         min-height: 250px;
       }
+
+      .show-item {
+        grid-template-columns: 72px 1fr;
+      }
+
+      .show-link {
+        grid-column: 1 / -1;
+        justify-self: stretch;
+        text-align: center;
+      }
+
+      .show-date {
+        padding-right: 12px;
+      }
+
     }
   </style>
 </head>
@@ -358,6 +459,21 @@
       </div>
     </section>
 
+
+    <section class="grid">
+      <div class="card shows-card">
+        <h2>Upcoming Dates</h2>
+        <p class="shows-intro">
+          Catch Danka live in Jacksonville and beyond. For booking inquiries, contact
+          <a href="mailto:kc@talentandartists.com">kc@talentandartists.com</a>.
+        </p>
+
+        <div class="shows-list" id="shows-list">
+          <!-- Shows are loaded from the JavaScript array below. -->
+        </div>
+      </div>
+    </section>
+
     <section class="grid">
       <div class="card">
         <h2>Highlights</h2>
@@ -390,6 +506,69 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const shows = [
+      {
+        date: "2026-07-12",
+        venue: "Example Venue",
+        city: "Jacksonville, FL",
+        time: "8:00 PM",
+        ticketUrl: "#"
+      },
+      {
+        date: "2026-08-02",
+        venue: "Another Venue",
+        city: "St. Augustine, FL",
+        time: "7:30 PM",
+        ticketUrl: "#"
+      }
+    ];
+
+    const showsList = document.getElementById("shows-list");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const upcomingShows = shows
+      .map(show => ({
+        ...show,
+        dateObject: new Date(show.date + "T00:00:00")
+      }))
+      .filter(show => show.dateObject >= today)
+      .sort((a, b) => a.dateObject - b.dateObject);
+
+    if (upcomingShows.length === 0) {
+      showsList.innerHTML = '<div class="empty-shows">No upcoming dates announced yet. Check back soon.</div>';
+    } else {
+      showsList.innerHTML = upcomingShows.map(show => {
+        const month = show.dateObject.toLocaleString("en-US", { month: "short" });
+        const day = show.dateObject.toLocaleString("en-US", { day: "2-digit" });
+        const readableDate = show.dateObject.toLocaleDateString("en-US", {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        });
+
+        const linkText = show.ticketUrl && show.ticketUrl !== "#" ? "Tickets" : "Details";
+        const linkTarget = show.ticketUrl || "#";
+
+        return `
+          <article class="show-item">
+            <div class="show-date">
+              <span class="show-month">${month}</span>
+              <span class="show-day">${day}</span>
+            </div>
+
+            <div class="show-details">
+              <h3>${show.venue}</h3>
+              <p class="show-meta">${readableDate} · ${show.time} · ${show.city}</p>
+            </div>
+
+            <a class="show-link" href="${linkTarget}" target="_blank" rel="noopener">${linkText}</a>
+          </article>
+        `;
+      }).join("");
+    }
   </script>
 </body>
 </html>
