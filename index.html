@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Danka | Electronic Press Kit</title>
+  <title>DANKA</title>
   <meta name="description" content="Electronic Press Kit for Danka, a band from Jacksonville, Florida." />
 
   <style>
@@ -71,17 +71,37 @@
       letter-spacing: -0.06em;
       text-transform: uppercase;
     
+      /* Blended green/purple cannabis-strain-like text treatment */
       background:
-        radial-gradient(circle at 18% 25%, #e8ffe1 0 7%, transparent 18%),
-        radial-gradient(circle at 42% 65%, #b1e5a6 0 10%, transparent 24%),
-        radial-gradient(circle at 72% 32%, #7f3fbf 0 12%, transparent 27%),
-        linear-gradient(115deg, #74d36f 0%, #d8ffd0 28%, #7d3cb5 56%, #b1e5a6 82%, #4ba65a 100%);
-      background-size: 180% 180%;
+        radial-gradient(circle at 16% 24%, rgba(206, 255, 183, 0.95) 0 7%, transparent 19%),
+        radial-gradient(circle at 26% 36%, rgba(118, 58, 176, 0.72) 0 9%, transparent 20%),
+        radial-gradient(circle at 38% 68%, rgba(127, 207, 103, 0.88) 0 11%, transparent 24%),
+        radial-gradient(circle at 49% 43%, rgba(173, 110, 245, 0.8) 0 10%, transparent 22%),
+        radial-gradient(circle at 63% 26%, rgba(90, 176, 88, 0.92) 0 10%, transparent 22%),
+        radial-gradient(circle at 73% 58%, rgba(101, 41, 154, 0.78) 0 9%, transparent 20%),
+        radial-gradient(circle at 86% 32%, rgba(170, 245, 132, 0.88) 0 9%, transparent 21%),
+        radial-gradient(circle at 92% 72%, rgba(135, 74, 207, 0.76) 0 9%, transparent 20%),
+        linear-gradient(115deg,
+          #4ea85a 0%,
+          #8fd46d 14%,
+          #6e3aa8 24%,
+          #b4f08e 35%,
+          #9156d8 48%,
+          #62b95d 60%,
+          #c4ff9e 72%,
+          #6c329f 84%,
+          #4aa15b 100%);
+    
+      background-size: 190% 190%;
+      background-position: center;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 34px rgba(177, 229, 166, 0.18);
+    
+      text-shadow:
+        0 0 18px rgba(160, 96, 224, 0.16),
+        0 0 14px rgba(143, 212, 109, 0.14);
     }
 
     .tagline {
@@ -270,7 +290,7 @@
       </div>
 
       <div class="photo-card">
-        <!-- <span>Replace <strong>band-photo.jpg</strong> with your press photo</span> -->
+        <span></span>
       </div>
     </section>
 
@@ -364,7 +384,7 @@
     </section>
 
     <footer class="footer">
-      © <span id="year"></span> Danka. 
+      © <span id="year"></span> Danka 
     </footer>
   </main>
 
